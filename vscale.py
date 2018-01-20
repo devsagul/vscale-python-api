@@ -206,3 +206,16 @@ def scalet_delete(token, scalet_id):
                                    "application/json;charset=UTF-8",
                                    "X-Token": token}
                           )
+
+
+"""
+Function tasks_info performs a GET-request at
+https://api.vscale.io/v1/tasks, returns information on current tasks.
+Token has to be provided as a str object.
+"""
+
+
+def tasks_info(token):
+    return requests.get("https://api.vscale.io/v1/tasks",
+                          headers={"X-Token": token}
+                          )
