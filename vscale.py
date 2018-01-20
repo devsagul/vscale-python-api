@@ -94,7 +94,7 @@ https://api.vscale.io/v1/scalets/scalet_id, restarts a server
 that has given scalet_id.
 Token has to be provided as a str object.
 The second parameter is scalet_id that can be provided as an str object.
-Information on scalet's id can be found in output of function get_scalets
+Information on scalet's id can be found in output of function get_scalets.
 """
 
 
@@ -104,5 +104,27 @@ def scalet_restart(token, scalet_id):
                           headers={"Content-Type":
                                    "application/json;charset=UTF-8",
                                    "X-Token": token},
-                          data=json.dumps({"id":str(scalet_id)})
+                          data=json.dumps({"id": str(scalet_id)})
+                          )
+
+
+"""
+Function scalet_rebuild performs a PATCH-request at
+https://api.vscale.io/v1/scalets/scalet_id, reinstalls an OS on the server
+with a given scalet_id.
+Token has to be provided as a str object.
+The second parameter is scalet_id that can be provided as an str object.
+Old root password will be deleted, new root password has to be provided as 
+a str object.
+Information on scalet's id can be found in output of function get_scalets.
+"""
+
+
+def scalet_rebuild(token, scalet_id, password):
+    return requests.patch("https://api.vscale.io/v1/scalets/"+str(scalet_id)+
+                          "/rebuild",
+                          headers={"Content-Type":
+                                   "application/json;charset=UTF-8",
+                                   "X-Token": token},
+                          data=json.dumps({"password": str(password)})
                           )
