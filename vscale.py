@@ -240,3 +240,25 @@ def scalet_add_ssh(token, scalet_id, keys):
                                     "X-Token": token},
                             data=json.dumps({"keys": keys})
                            )
+
+
+"""
+Function scalet_backup performs a POST-request at
+https://api.vscale.io/v1/scalets/scalet_id, creates backup of the server 
+with a given scalet_id.
+Token has to be provided as a str object.
+The second parameter is scalet_id that can be provided as an str object.
+Information on scalet's id can be found in output of function get_scalets.
+The third parameter is the name of backup to be created. Must be provided 
+as a str object.
+"""
+
+
+def scalet_backup(token, scalet_id, name):
+    return requests.post("https://api.vscale.io/v1/scalets/"+str(scalet_id)+
+                          "/backup",
+                          headers={"Content-Type":
+                                   "application/json;charset=UTF-8",
+                                   "X-Token": token},
+                          data=json.dumps({"name": str(name)})
+                          )
