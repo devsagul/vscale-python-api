@@ -166,3 +166,25 @@ def scalet_start(token, scalet_id):
                                    "X-Token": token},
                           data=json.dumps({"id": str(scalet_id)})
                           )
+
+
+"""
+Function scalet_upgrade performs a POST-request at
+https://api.vscale.io/v1/scalets/scalet_id, upgrades the server
+with a given scalet_id.
+Token has to be provided as a str object.
+The second parameter is scalet_id that can be provided as an str object.
+Information on scalet's id can be found in output of function get_scalets.
+Third parameter is an id of a desired configuration, has to be provided as 
+str object.
+"""
+
+
+def scalet_upgrade(token, scalet_id, rplan):
+    return requests.post("https://api.vscale.io/v1/scalets/"+str(scalet_id)+
+                          "/upgrade",
+                          headers={"Content-Type":
+                                   "application/json;charset=UTF-8",
+                                   "X-Token": token},
+                          data=json.dumps({"rplan": str(rplan)})
+                          )
