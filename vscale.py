@@ -219,3 +219,24 @@ def tasks_info(token):
     return requests.get("https://api.vscale.io/v1/tasks",
                           headers={"X-Token": token}
                           )
+
+
+"""
+Function scalet_add_ssh performs a PATCH-request at 
+https://api.vscale.io/v1/scalets/scalet_id, adds given SSH-key to the server
+with a given scalet_id.
+Token has to be provided as a str object.
+The second parameter is scalet_id that can be provided as an str object.
+Information on scalet's id can be found in output of function get_scalets.
+The third parameter is a list of ssh-keys. List of available ssh-keys 
+may be obtained via sshkeys_list function (see beelow). 
+"""
+
+
+def scalet_add_ssh(token, scalet_id, keys):
+    return requests.patch("https://api.vscale.io/v1/scalets/" + str(scalet_id),
+                           headers={"Content-Type":
+                                    "application/json;charset=UTF-8",
+                                    "X-Token": token},
+                            data=json.dumps({"keys": keys})
+                           )
