@@ -466,3 +466,30 @@ def get_images(token):
     return requests.get("https://api.vscale.io/v1/images",
                         headers={"X-Token": token}
                         )
+
+
+"""
+Function get_rplans performs a GET-request at
+https://api.vscale.io/v1/rplans, returns list of available configurations.
+Token has to be provided as a str object.
+"""
+
+
+def get_rplans(token):
+    return requests.get("https://api.vscale.io/v1/rplans",
+                        headers={"X-Token": token}
+                        )
+
+
+"""
+Function get_prices performs a GET-request at 
+https://api.vscale.io/v1/billing/prices, returns list of prices for 
+available configurations.
+Token has to be provided as a str object.
+"""
+
+
+def get_prices(token):
+    return requests.get("https://api.vscale.io/v1/billing/prices",
+                        headers={"X-Token": token}
+                        )
