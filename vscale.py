@@ -302,8 +302,8 @@ def add_tag(token, tag_name, scalets=None):
         data["scalets"] = scalets
     return requests.post("https://api.vscale.io/v1/scalets/tags",
                         headers={"Content-Type":
-                                   "application/json;charset=UTF-8",
-                                   "X-Token": token},
+                                 "application/json;charset=UTF-8",
+                                 "X-Token": token},
                         data=json.dumps(data)
                         )
 
@@ -354,8 +354,8 @@ def update_tag(token, tagid, tag_name, scalets=None):
         data["scalets"] = scalets
     return requests.put("https://api.vscale.io/v1/scalets/tags/"+str(tagid),
                         headers={"Content-Type":
-                                   "application/json;charset=UTF-8",
-                                   "X-Token": token},
+                                 "application/json;charset=UTF-8",
+                                 "X-Token": token},
                         data=json.dumps(data)
                         )
 
@@ -373,3 +373,68 @@ def delete_tag(token, tagid):
                            str(tagid),
                            headers={"X-Token": token}
                            )
+
+"""
+Function get_backups performs a GET-request at
+https://api.vscale.io/v1/backups, returns list of backups.
+Token has to be provided as a str object.
+"""
+
+
+def get_backups(token):
+    return requests.get("https://api.vscale.io/v1/backups",
+                        headers={"Content-Type":
+                                 "application/json;charset=UTF-8",
+                                 "X-Token": token}
+                        )
+
+
+"""
+Function backup_info performs a GET-request at
+https://api.vscale.io/v1/backups, returns info on a backup with a given id.
+Token has to be provided as a str object.
+Backup id has to be provided as a str object.
+"""
+
+
+def backup_info(token, backupid):
+    return requests.get("https://api.vscale.io/v1/backups/"+str(backupid),
+                        headers={"Content-Type":
+                                 "application/json;charset=UTF-8",
+                                 "X-Token": token}
+                        )
+
+
+"""
+Function delete_backup performs a DELETE-request at
+https://api.vscale.io/v1/backups, deletes backup with a given id.
+Token has to be provided as a str object.
+Backup id has to be provided as a str object.
+"""
+
+
+def delete_backup(token, backupid):
+    return requests.delete("https://api.vscale.io/v1/backups/"+str(backupid),
+                        headers={"Content-Type":
+                                 "application/json;charset=UTF-8",
+                                 "X-Token": token}
+                        )
+
+
+"""
+Function relocate_backup performs a POST-request at 
+https://api.vscale.io/v1/backups, relocates backup into new zone.
+Token has to be provided as a str object.
+Backup id has to be provided as a str object.
+Destination has to be provided as a str object.
+"""
+
+
+def relocate_backup(token, backupid, destination):
+    return requests.post("https://api.vscale.io/v1/backups/"+
+                         str(backupid)+"/relocate",
+                        headers={"Content-Type":
+                                 "application/json;charset=UTF-8",
+                                 "X-Token": token},
+                        data={"destination": str(destination)}
+                        )
