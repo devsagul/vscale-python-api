@@ -188,3 +188,21 @@ def scalet_upgrade(token, scalet_id, rplan):
                                    "X-Token": token},
                           data=json.dumps({"rplan": str(rplan)})
                           )
+
+
+"""
+Function scalet_delete performs a DELETE-request at
+https://api.vscale.io/v1/scalets/scalet_id, deletes the server
+with a given scalet_id.
+Token has to be provided as a str object.
+The second parameter is scalet_id that can be provided as an str object.
+Information on scalet's id can be found in output of function get_scalets.
+"""
+
+
+def scalet_delete(token, scalet_id):
+    return requests.delete("https://api.vscale.io/v1/scalets/"+str(scalet_id),
+                          headers={"Content-Type":
+                                   "application/json;charset=UTF-8",
+                                   "X-Token": token}
+                          )
