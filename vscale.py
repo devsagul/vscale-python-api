@@ -1,4 +1,5 @@
 import requests
+import json
 
 
 """
@@ -25,3 +26,47 @@ def get_scalets(token):
     return requests.get("https://api.vscale.io/v1/scalets",
                         headers={"X-Token": token}
                         )
+
+
+"""
+Function create_scalet performs a POST-request at
+https://api.vscale.io/v1/scalets, returns information on created server.
+Parameters:
+token - API token, must be provided as a str object
+name - name of a server to be created
+password - password for the server. Can be set to None, if authentication 
+will be established via SSH keys (see below)
+make_from - image to create server from
+rplan - id of payment plan
+do_start - boolean value that detects if server has to be started after 
+creation
+location - id of data-center where to create a server
+"""
+
+
+def create_scalet(token,
+                  name,
+                  password,
+                  keys=None,
+                  make_from="ubuntu_14.04_64_002_master",
+                  rplan="medium",
+                  do_start=False,
+                  location="spb0"):
+    data = {"make_from": str(make_from),
+            "rplan": str(rplan),
+            "do_start": bool(do_start),
+            "name": str(name),
+            "location": str(location)
+            }
+
+    if password != "" and password is not None:
+        data["password"] = str(password)
+    if keys is not None:
+        data["keys"] = list(keys)
+
+    return requests.post("https://api.vscale.io/v1/scalets",
+                         headers={"Content-Type":
+                                  "application/json;charset=UTF-8",
+                                  "X-Token": token},
+                         data=json.dumps(data)
+                         )
