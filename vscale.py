@@ -438,3 +438,31 @@ def relocate_backup(token, backupid, destination):
                                  "X-Token": token},
                         data={"destination": str(destination)}
                         )
+
+
+"""
+Function get_locations performs a GET-request at
+https://api.vscale.io/v1/locations, returns list of data-centers, 
+as well as images and configurations available at the centers.
+Token has to be provided as a str object.
+"""
+
+
+def get_locations(token):
+    return requests.get("https://api.vscale.io/v1/locations",
+                        headers={"X-Token": token}
+                        )
+
+
+"""
+Function get_images performs a GET-request at
+https://api.vscale.io/v1/images, returns list of images, 
+as well as data-centers and configurations available for the images.
+Token has to be provided as a str object.
+"""
+
+
+def get_images(token):
+    return requests.get("https://api.vscale.io/v1/images",
+                        headers={"X-Token": token}
+                        )
