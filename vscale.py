@@ -70,3 +70,19 @@ def create_scalet(token,
                                   "X-Token": token},
                          data=json.dumps(data)
                          )
+
+
+"""
+Function scalet_info performs a GET-request at
+https://api.vscale.io/v1/scalets/scalet_id, returns information on server
+that has given scalet_id.
+Token has to be provided as a str object.
+The second parameter is scalet_id that can be provided as an str object.
+Information on scalet's id can be found in output of function get_scalets.
+"""
+
+
+def scalet_info(token, scalet_id):
+    return requests.get("https://api.vscale.io/v1/scalets/"+str(scalet_id),
+                        headers={"X-Token": token}
+                        )
