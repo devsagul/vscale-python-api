@@ -284,3 +284,92 @@ def scalet_restore(token, scalet_id, backup_id):
                                    "X-Token": token},
                           data=json.dumps({"make_from": str(backup_id)})
                           )
+
+
+"""
+Function add_tag performs a POST-request at
+https://api.vscale.io/v1/scalets/tags, adds new server tag.
+Token has to be provided as a str object.
+The second parameter is the name of tag to be added.
+The third parameter is a list of scalet ids to which tag should be added. 
+This parameter is optional.
+"""
+
+
+def add_tag(token, tag_name, scalets=None):
+    data={"name": str(tag_name)}
+    if scalets is not None:
+        data["scalets"] = scalets
+    return requests.post("https://api.vscale.io/v1/scalets/tags",
+                        headers={"Content-Type":
+                                   "application/json;charset=UTF-8",
+                                   "X-Token": token},
+                        data=json.dumps(data)
+                        )
+
+
+"""
+Function get_tags performs a GET-request at 
+https://api.vscale.io/v1/scalets/tags, returns list of server tags.
+Token has to be provided as a str object.
+"""
+
+
+def get_tags(token):
+    return requests.get("https://api.vscale.io/v1/scalets/tags",
+                          headers={"X-Token": token}
+                          )
+
+
+"""
+Function tag_info performs a GET-request at
+https://api.vscale.io/v1/scalets/tags, returns info on a tag with a given
+tag id.
+Token has to be provided as a str object.
+Tag id has to be provided as a str object.
+"""
+
+
+def tag_info(token, tagid):
+    return requests.get("https://api.vscale.io/v1/scalets/tags/"+str(tagid),
+                          headers={"X-Token": token}
+                          )
+
+
+"""
+Function update_tag performs a PUT-request at
+https://api.vscale.io/v1/scalets/tags, updates name and scalets of the tag 
+with a given tag id.
+Token has to be provided as a str object.
+Tag id has to be provided as a str object.
+Name is the new tag name. Has to be provided as a str object.
+The third parameter is a list of scalet ids to which tag should be added. 
+This parameter is optional.
+"""
+
+
+def update_tag(token, tagid, tag_name, scalets=None):
+    data={"name": str(tag_name)}
+    if scalets is not None:
+        data["scalets"] = scalets
+    return requests.put("https://api.vscale.io/v1/scalets/tags/"+str(tagid),
+                        headers={"Content-Type":
+                                   "application/json;charset=UTF-8",
+                                   "X-Token": token},
+                        data=json.dumps(data)
+                        )
+
+
+"""
+Function delete_tag performs a DELETE-request at
+https://api.vscale.io/v1/scalets/tags, deletes tag with a given tag id.
+Token has to be provided as a str object.
+Tag id has to be provided as a str object.
+"""
+
+
+def delete_tag(token, tagid):
+    return requests.delete("https://api.vscale.io/v1/scalets/tags/"+
+                           str(tagid),
+                           headers={"X-Token": token}
+                           )
