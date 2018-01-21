@@ -570,3 +570,46 @@ def set_notifications(token, balance):
                         headers={"X-Token": token},
                         data={"notify_balance": str(balance)}
                         )
+
+
+"""
+Function get_balance performs a GET-request at 
+https://api.vscale.io/v1/billing/balance, returns information on balance.
+Token has to be provided as a str object.
+"""
+
+
+def get_balance(token):
+    return requests.get("https://api.vscale.io/v1/billing/balance",
+                        headers={"X-Token": token}
+                        )
+
+
+"""
+Function get_payments performs a GET-request at 
+https://api.vscale.io/v1/billing/payments, returns information on last 
+payments.
+Token has to be provided as a str object.
+"""
+
+
+def get_payments(token):
+    return requests.get("https://api.vscale.io/v1/billing/payments",
+                        headers={"X-Token": token}
+                        )
+
+
+"""
+Function consumption performs a GET-request at 
+https://api.vscale.io/v1/billing/consumption. return all the spendings 
+from start date till end date excluding the latter one.
+Token has to be provided as a str object.
+Start and end date have to be provided as a str object in form YYYY-MM-DD.
+"""
+
+
+def consumption(token, start, end):
+    return requests.get("https://api.vscale.io/v1/billing/consumption"+
+                        "?start="+str(start)+"&end="+str(end),
+                        headers={"X-Token": token}
+                        )
