@@ -697,3 +697,96 @@ def delete_domain(token, domainid):
                                    "application/json;charset=UTF-8",
                                    "X-Token": token}
                            )
+
+
+"""
+Function domain_records performs a GET-request at 
+https://api.vscale.io/v1/domains/, returns list of records of the domain 
+with a given domain id.
+Token has to be provided as a str object.
+Domain id has to be provided as a str object.
+"""
+
+
+def domain_records(token, domainid):
+    return requests.get("https://api.vscale.io/v1/domains/"+str(domainid)+
+                        "/records/",
+                        headers={"X-Token": token}
+                        )
+
+
+"""
+Function set_domain_record performs a POST-request at 
+https://api.vscale.io/v1/domains/, creates new resource record for 
+the domain with a given domain id.
+Token has to be provided as a str object.
+Domain id has to be provided as a str object.
+Data has to be provided as a dict object.
+"""
+
+
+def set_domain_record(token, domainid, data):
+    return requests.post("https://api.vscale.io/v1/domains/"+str(domainid)+
+                         "/records/",
+                         headers={"Content-Type":
+                                  "application/json;charset=UTF-8",
+                                  "X-Token": token},
+                         data=json.loads(data)
+                         )
+
+
+"""
+Function update_domain_record performs a PUT-request at 
+https://api.vscale.io/v1/domains/, updates resource record with a given 
+record id for the domain with a given domain id.
+Token has to be provided as a str object.
+Domain id has to be provided as a str object.
+Record id has to be provided as a str object.
+Data has to be provided as a dict object.
+"""
+
+
+def update_domain_record(token, domainid, recordid, data):
+    return requests.put("https://api.vscale.io/v1/domains/"+str(domainid)+
+                        "/records/"+str(recordid),
+                        headers={"Content-Type":
+                                 "application/json;charset=UTF-8",
+                                 "X-Token": token},
+                        data=json.loads(data)
+                        )
+
+
+"""
+Function delete_domain_record performs a DELETE-request at 
+https://api.vscale.io/v1/domains/, deletes resource record with a given 
+record id for the domain with a given domain id.
+Token has to be provided as a str object.
+Domain id has to be provided as a str object.
+Record id has to be provided as a str object.
+"""
+
+
+def delete_domain_record(token, domainid, recordid):
+    return requests.delete("https://api.vscale.io/v1/domains/"+
+                           str(domainid)+"/records/"+str(recordid),
+                           headers={"Content-Type":
+                                 "application/json;charset=UTF-8",
+                                 "X-Token": token}
+                           )
+
+
+"""
+Function get_domain_record performs a GET-request at 
+https://api.vscale.io/v1/domains/, gets resource record with a given 
+record id for the domain with a given domain id.
+Token has to be provided as a str object.
+Domain id has to be provided as a str object.
+Record id has to be provided as a str object.
+"""
+
+
+def get_domain_record(token, domainid, recordid):
+    return requests.get("https://api.vscale.io/v1/domains/"+
+                        str(domainid)+"/records/"+str(recordid),
+                        headers={"X-Token": token}
+                        )
