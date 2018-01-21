@@ -57,7 +57,7 @@ def create_scalet(token,
             "do_start": bool(do_start),
             "name": str(name),
             "location": str(location)
-            }
+           }
 
     if password != "" and password is not None:
         data["password"] = str(password)
@@ -202,10 +202,10 @@ Information on scalet's id can be found in output of function get_scalets.
 
 def scalet_delete(token, scalet_id):
     return requests.delete("https://api.vscale.io/v1/scalets/"+str(scalet_id),
-                          headers={"Content-Type":
-                                   "application/json;charset=UTF-8",
-                                   "X-Token": token}
-                          )
+                           headers={"Content-Type":
+                                    "application/json;charset=UTF-8",
+                                    "X-Token": token}
+                           )
 
 
 """
@@ -217,8 +217,8 @@ Token has to be provided as a str object.
 
 def tasks_info(token):
     return requests.get("https://api.vscale.io/v1/tasks",
-                          headers={"X-Token": token}
-                          )
+                        headers={"X-Token": token}
+                        )
 
 
 """
@@ -235,11 +235,11 @@ may be obtained via sshkeys_list function (see beelow).
 
 def scalet_add_ssh(token, scalet_id, keys):
     return requests.patch("https://api.vscale.io/v1/scalets/" + str(scalet_id),
-                           headers={"Content-Type":
-                                    "application/json;charset=UTF-8",
-                                    "X-Token": token},
-                            data=json.dumps({"keys": keys})
-                           )
+                          headers={"Content-Type":
+                                   "application/json;charset=UTF-8",
+                                   "X-Token": token},
+                          data=json.dumps({"keys": keys})
+                          )
 
 
 """
@@ -257,11 +257,11 @@ as a str object.
 def scalet_backup(token, scalet_id, name):
     return requests.post("https://api.vscale.io/v1/scalets/"+str(scalet_id)+
                           "/backup",
-                          headers={"Content-Type":
-                                   "application/json;charset=UTF-8",
-                                   "X-Token": token},
-                          data=json.dumps({"name": str(name)})
-                          )
+                         headers={"Content-Type":
+                                  "application/json;charset=UTF-8",
+                                  "X-Token": token},
+                         data=json.dumps({"name": str(name)})
+                         )
 
 
 """
@@ -278,12 +278,12 @@ as a str object.
 
 def scalet_restore(token, scalet_id, backup_id):
     return requests.post("https://api.vscale.io/v1/scalets/"+str(scalet_id)+
-                          "/rebuild",
-                          headers={"Content-Type":
-                                   "application/json;charset=UTF-8",
-                                   "X-Token": token},
-                          data=json.dumps({"make_from": str(backup_id)})
-                          )
+                         "/rebuild",
+                         headers={"Content-Type":
+                                  "application/json;charset=UTF-8",
+                                  "X-Token": token},
+                         data=json.dumps({"make_from": str(backup_id)})
+                         )
 
 
 """
@@ -301,11 +301,11 @@ def add_tag(token, tag_name, scalets=None):
     if scalets is not None:
         data["scalets"] = scalets
     return requests.post("https://api.vscale.io/v1/scalets/tags",
-                        headers={"Content-Type":
-                                 "application/json;charset=UTF-8",
-                                 "X-Token": token},
-                        data=json.dumps(data)
-                        )
+                         headers={"Content-Type":
+                                  "application/json;charset=UTF-8",
+                                  "X-Token": token},
+                         data=json.dumps(data)
+                         )
 
 
 """
@@ -317,8 +317,8 @@ Token has to be provided as a str object.
 
 def get_tags(token):
     return requests.get("https://api.vscale.io/v1/scalets/tags",
-                          headers={"X-Token": token}
-                          )
+                        headers={"X-Token": token}
+                        )
 
 
 """
@@ -332,8 +332,8 @@ Tag id has to be provided as a str object.
 
 def tag_info(token, tagid):
     return requests.get("https://api.vscale.io/v1/scalets/tags/"+str(tagid),
-                          headers={"X-Token": token}
-                          )
+                        headers={"X-Token": token}
+                        )
 
 
 """
@@ -418,7 +418,7 @@ def delete_backup(token, backupid):
                            headers={"Content-Type":
                                  "application/json;charset=UTF-8",
                                  "X-Token": token}
-                          )
+                           )
 
 
 """
@@ -437,7 +437,7 @@ def relocate_backup(token, backupid, destination):
                                  "application/json;charset=UTF-8",
                                  "X-Token": token},
                          data={"destination": str(destination)}
-                        )
+                         )
 
 
 """
@@ -451,7 +451,7 @@ Token has to be provided as a str object.
 def get_locations(token):
     return requests.get("https://api.vscale.io/v1/locations",
                         headers={"X-Token": token}
-                       )
+                        )
 
 
 """
@@ -465,7 +465,7 @@ Token has to be provided as a str object.
 def get_images(token):
     return requests.get("https://api.vscale.io/v1/images",
                         headers={"X-Token": token}
-                       )
+                        )
 
 
 """
@@ -478,7 +478,7 @@ Token has to be provided as a str object.
 def get_rplans(token):
     return requests.get("https://api.vscale.io/v1/rplans",
                         headers={"X-Token": token}
-                       )
+                        )
 
 
 """
@@ -492,7 +492,7 @@ Token has to be provided as a str object.
 def get_prices(token):
     return requests.get("https://api.vscale.io/v1/billing/prices",
                         headers={"X-Token": token}
-                       )
+                        )
 
 
 """
@@ -505,7 +505,7 @@ Token has to be provided as a str object.
 def list_ssh(token):
     return requests.get("https://api.vscale.io/v1/sshkeys",
                         headers={"X-Token": token}
-                       )
+                        )
 
 
 """
@@ -524,7 +524,7 @@ def new_ssh(token, name, key):
                                   "X-Token": token},
                          data={"name": str(name),
                                "key": str(key)}
-                        )
+                         )
 
 
 """
@@ -540,4 +540,4 @@ def delete_ssh(token, keyid):
                            headers={"Content-Type":
                                     "application/json;charset=UTF-8",
                                     "X-Token": token}
-                          )
+                           )
