@@ -770,8 +770,8 @@ def delete_domain_record(token, domainid, recordid):
     return requests.delete("https://api.vscale.io/v1/domains/"+
                            str(domainid)+"/records/"+str(recordid),
                            headers={"Content-Type":
-                                 "application/json;charset=UTF-8",
-                                 "X-Token": token}
+                                    "application/json;charset=UTF-8",
+                                    "X-Token": token}
                            )
 
 
@@ -790,3 +790,91 @@ def get_domain_record(token, domainid, recordid):
                         str(domainid)+"/records/"+str(recordid),
                         headers={"X-Token": token}
                         )
+
+
+"""
+Function create_domain_tag performs a POST-request at 
+https://api.vscale.io/v1/domains/tags/, creates a new domain tag.
+Token has to be provided as a str object.
+Tag name has to be provided as a str object.
+Domains to be added to the tag that is to be created can be 
+provided as a list. This parameter is optional.
+"""
+
+
+def create_domain_tag(token, name, domains=None):
+    data = {"name": name}
+    if domains is not None:
+        data["domains"] = str(domains)
+    return requests.post("https://api.vscale.io/v1/domains/tags/",
+                         headers={"Content-Type":
+                                  "application/json;charset=UTF-8",
+                                  "X-Token": token},
+                         data=json.loads(data)
+                         )
+
+
+"""
+Function list_domain_tags performs a GET-request at 
+https://api.vscale.io/v1/domains/tags/, returns list of domain tags.
+Token has to be provided as a str object.
+"""
+
+
+def list_domain_tags(token):
+    return requests.get("https://api.vscale.io/v1/domains/tags",
+                        headers={"X-Token": token}
+                        )
+
+
+"""
+Function get_domain_tag_info performs a GET-request at 
+https://api.vscale.io/v1/domains/tags/, returns info on 
+the domain tag with a given tag id.
+Token has to be provided as a str object.
+Tag id has to be provided as a str object.
+"""
+
+
+def get_domain_tag_info(token, tagid):
+    return requests.get("https://api.vscale.io/v1/domains/tags/"+str(tagid),
+                        headers={"X-Token": token}
+                        )
+
+
+"""
+Function update_domain_tag performs a PUT-request at 
+https://api.vscale.io/v1/domains/tags/, updates info on 
+the domain tag with a given tag id.
+Token has to be provided as a str object.
+Tag id has to be provided as a str object.
+Data has to be provided as a dict object.
+"""
+
+
+def update_domain_tag(token, tagid, data):
+    return requests.put("https://api.vscale.io/v1/domains/tags"+
+                        str(tagid),
+                        headers={"Content-Type":
+                                 "application/json;charset=UTF-8",
+                                 "X-Token": token},
+                        data=json.loads(data)
+                        )
+
+
+"""
+Function delete_domain_tag performs a DELETE-request at 
+https://api.vscale.io/v1/domains/tags/, deletes domain tag with a 
+given tag id.
+Token has to be provided as a str object.
+Tag id has to be provided as a str object.
+"""
+
+
+def delete_domain_tag(token, tagid):
+    return requests.delete("https://api.vscale.io/v1/domains/tags/"+
+                           str(tagid),
+                           headers={"Content-Type":
+                                    "application/json;charset=UTF-8",
+                                     "X-Token": token}
+                           )
