@@ -878,3 +878,84 @@ def delete_domain_tag(token, tagid):
                                     "application/json;charset=UTF-8",
                                      "X-Token": token}
                            )
+
+
+"""
+Function create_ptr_record performs a POST-request at 
+https://api.vscale.io/v1/domains/ptr/, creates a new PTR record.
+Token has to be provided as a str object.
+ip has to be provided as a str object.
+Domain has to be provided as a str object.
+"""
+
+
+def create_ptr_record(token, ip, domain):
+    return requests.post("https://api.vscale.io/v1/domains/ptr/",
+                         headers={"Content-Type":
+                                  "application/json;charset=UTF-8",
+                                  "X-Token": token},
+                         data=json.loads({"ip": ip, "content": domain})
+                         )
+
+
+"""
+Function list_ptr_records performs a GET-record at 
+https://api.vscale.io/v1/domains/ptr/, returns a list of all PTR records.
+Token has to be provided as a str object.
+"""
+
+def list_ptr_records(token):
+    return requests.get("https://api.vscale.io/v1/domains/ptr/",
+                        headers={"X-Token": token}
+                        )
+
+
+"""
+Function get_ptr_record performs a GET-record at 
+https://api.vscale.io/v1/domains/ptr/, gets information on a 
+PTR record with a given ptr id.
+Token has to be provided as a str object.
+PTR id has to be provided as a str object.
+"""
+
+
+def get_ptr_record(token, ptrid):
+    return requests.get("https://api.vscale.io/v1/domains/ptr/"+str(ptrid),
+                        headers={"X-Token": token}
+                        )
+
+
+"""
+Function update_ptr_record performs a PUT-request at 
+https://api.vscale.io/v1/domains/ptr/, updates PTR record.
+Token has to be provided as a str object.
+PTR id has to be provided as a str object.
+ip has to be provided as a str object.
+Domain has to be provided as a str object.
+"""
+
+
+def update_ptr_record(token, ptrid, ip, domain):
+    return requests.put("https://api.vscale.io/v1/domains/ptr/"+str(ptrid),
+                        headers={"Content-Type":
+                                 "application/json;charset=UTF-8",
+                                 "X-Token": token},
+                        data=json.loads({"ip": ip, "content": domain})
+                        )
+
+
+"""
+Function delete_ptr_record performs a DELETE-record at 
+https://api.vscale.io/v1/domains/ptr/, deletes a PTR record with a 
+given PTR id.
+Token has to be provided as a str object.
+PTR id has to be provided as a str object.
+"""
+
+
+def delete_ptr_record(token, ptrid):
+    return requests.delete("https://api.vscale.io/v1/domains/ptr/"+str(ptrid),
+                           headers={"Content-Type":
+                                    "application/json;charset=UTF-8",
+                                    "X-Token": token},
+                           )
