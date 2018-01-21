@@ -541,3 +541,32 @@ def delete_ssh(token, keyid):
                                     "application/json;charset=UTF-8",
                                     "X-Token": token}
                            )
+
+
+"""
+Function notifications performs a GET-request at
+https://api.vscale.io/v1/billing/notify, return information on notification 
+policy.
+Token has to be provided as a str object.
+"""
+
+
+def notifications(token):
+    return requests.get("https://api.vscale.io/v1/billing/notify",
+                        headers={"X-Token": token}
+                        )
+
+
+"""
+Function set_notifications performs a PUT-request at 
+https://api.vscale.io/v1/billing/notify, sets new notification policy.
+Token has to be provided as a str object.
+Balance has to be provided as a str object.
+"""
+
+
+def set_notifications(token, balance):
+    return requests.put("https://api.vscale.io/v1/billing/notify",
+                        headers={"X-Token": token},
+                        data={"notify_balance": str(balance)}
+                        )
