@@ -601,7 +601,7 @@ def get_payments(token):
 
 """
 Function consumption performs a GET-request at 
-https://api.vscale.io/v1/billing/consumption. return all the spendings 
+https://api.vscale.io/v1/billing/consumption, returns all the spendings 
 from start date till end date excluding the latter one.
 Token has to be provided as a str object.
 Start and end date have to be provided as a str object in form YYYY-MM-DD.
@@ -613,3 +613,87 @@ def consumption(token, start, end):
                         "?start="+str(start)+"&end="+str(end),
                         headers={"X-Token": token}
                         )
+
+
+"""
+Function get_domains performs a GET-request at 
+https://api.vscale.io/v1/domains/, returns list of domains.
+Token has to be provided as a str object.
+"""
+
+
+def get_domains(token):
+    return requests.get("https://api.vscale.io/v1/domains/",
+                        headers={"X-Token": token}
+                        )
+
+
+"""
+Function new_domain performs a POST-request at 
+https://api.vscale.io/v1/domains/, creates new domain. 
+Token has to be provided as a str object.
+Name has to be provided as a str object.
+BIND file has to be provided as a str object.
+"""
+
+
+def new_domain(token, name, bind_file=None):
+    data = {"name": str(name)}
+    if bind_file is not None and bind_file != "":
+        data["bind_zone"] = bind_file
+    return requests.post("https://api.vscale.io/v1/domains/",
+                         headers={"Content-Type":
+                                  "application/json;charset=UTF-8",
+                                  "X-Token": token},
+                         data=json.loads(data)
+                         )
+
+
+"""
+Function domain_info performs a GET-request at 
+https://api.vscale.io/v1/domains/, gets information of the domain with 
+a given domain id.
+Token has to be provided as a str object.
+Domain id has to be provided as a str object.
+"""
+
+
+def domain_info(token, domainid):
+    return requests.get("https://api.vscale.io/v1/domains/"+str(domainid),
+                        headers={"X-Token": token}
+                        )
+
+
+"""
+Function update_domain performs a PATCH-request at 
+https://api.vscale.io/v1/domains/, updates information of the domain 
+with a given domain id.
+Token has to be provided as a str object.
+Domain id has to be provided as a str object.
+Tags have to be provided as a list.
+"""
+
+
+def update_domain(token, domainid, tags):
+    return requests.patch("https://api.vscale.io/v1/domains/"+str(domainid),
+                          headers={"Content-Type":
+                                   "application/json;charset=UTF-8",
+                                   "X-Token": token},
+                          data=json.loads({"tags": str(tags)})
+                          )
+
+
+"""
+Function delete_domain performs a DELETE-request at 
+https://api.vscale.io/v1/domains/, deletes the domain with a given domain id.
+Token has to be provided as a str object.
+Domain id has to be provided as a str object.
+"""
+
+
+def delete_domain(token, domainid):
+    return requests.delete("https://api.vscale.io/v1/domains/"+str(domainid),
+                          headers={"Content-Type":
+                                   "application/json;charset=UTF-8",
+                                   "X-Token": token}
+                           )
