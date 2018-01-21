@@ -415,10 +415,10 @@ Backup id has to be provided as a str object.
 
 def delete_backup(token, backupid):
     return requests.delete("https://api.vscale.io/v1/backups/"+str(backupid),
-                        headers={"Content-Type":
+                           headers={"Content-Type":
                                  "application/json;charset=UTF-8",
                                  "X-Token": token}
-                        )
+                          )
 
 
 """
@@ -433,10 +433,10 @@ Destination has to be provided as a str object.
 def relocate_backup(token, backupid, destination):
     return requests.post("https://api.vscale.io/v1/backups/"+
                          str(backupid)+"/relocate",
-                        headers={"Content-Type":
+                         headers={"Content-Type":
                                  "application/json;charset=UTF-8",
                                  "X-Token": token},
-                        data={"destination": str(destination)}
+                         data={"destination": str(destination)}
                         )
 
 
@@ -451,7 +451,7 @@ Token has to be provided as a str object.
 def get_locations(token):
     return requests.get("https://api.vscale.io/v1/locations",
                         headers={"X-Token": token}
-                        )
+                       )
 
 
 """
@@ -465,7 +465,7 @@ Token has to be provided as a str object.
 def get_images(token):
     return requests.get("https://api.vscale.io/v1/images",
                         headers={"X-Token": token}
-                        )
+                       )
 
 
 """
@@ -478,7 +478,7 @@ Token has to be provided as a str object.
 def get_rplans(token):
     return requests.get("https://api.vscale.io/v1/rplans",
                         headers={"X-Token": token}
-                        )
+                       )
 
 
 """
@@ -492,4 +492,52 @@ Token has to be provided as a str object.
 def get_prices(token):
     return requests.get("https://api.vscale.io/v1/billing/prices",
                         headers={"X-Token": token}
+                       )
+
+
+"""
+Function list_ssh performs a GET-request at 
+https://api.vscale.io/v1/sshkeys, returns list of SSH-keys on your account.
+Token has to be provided as a str object.
+"""
+
+
+def list_ssh(token):
+    return requests.get("https://api.vscale.io/v1/sshkeys",
+                        headers={"X-Token": token}
+                       )
+
+
+"""
+Function new_ssh performs a POST-request at
+https://api.vscale.io/v1/sshkeys, adds new SSH-key to your account.
+Token has to be provided as a str object.
+Name has to be provided as a str object.
+Public key has to be provided as a str object.
+"""
+
+
+def new_ssh(token, name, key):
+    return requests.post("https://api.vscale.io/v1/sshkeys",
+                         headers={"Content-Type":
+                                  "application/json;charset=UTF-8",
+                                  "X-Token": token},
+                         data={"name": str(name),
+                               "key": str(key)}
                         )
+
+
+"""
+Function new_ssh performs a DELETE-request at
+https://api.vscale.io/v1/sshkeys, deletes SSH-key from your account.
+Token has to be provided as a str object.
+Key id has to be provided as a str object.
+"""
+
+
+def delete_ssh(token, keyid):
+    return requests.delete("https://api.vscale.io/v1/sshkeys"+str(keyid),
+                           headers={"Content-Type":
+                                    "application/json;charset=UTF-8",
+                                    "X-Token": token}
+                          )
